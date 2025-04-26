@@ -25,12 +25,12 @@ annual_rate = st.number_input("연 이자율 (%)", min_value=0.0, value=5.0)
 years = st.number_input("대출 기간 (년)", min_value=1, value=30)
 ltv = st.number_input("LTV 비율 (%)", min_value=1.0, max_value=100.0, value=80.0)
 
-# 전세금 입력: 1000만 원 단위 조정
+# 전세금 입력: 100만 원 단위 조정
 jeonse = st.number_input(
     "보유 중인 전세금 (₩)",
     min_value=0,
     value=30000000,
-    step=10000000
+    step=1000000
 )
 jeonse_million = jeonse / 10000
 st.caption(f"현재 입력된 전세금: {jeonse_million:,.0f}만 원")
