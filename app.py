@@ -9,21 +9,26 @@ def calculate_house_price(monthly_payment, annual_rate, years, ltv):
 
 st.title("🏡 아파트 구매 가능 가격 계산기 by NOWKO")
 
-# 월 상환 가능액 (format 제거, 숫자만 받고 표시할 때 쉼표 추가)
-monthly_payment = st.number_input(
-    "월 상환 가능액 (₩)",
-    min_value=0,
-    value=1800000,
-    step=10000
-)
-
+monthly_payment = st.number_input("월 상환 가능액 (₩)", min_value=0, value=1800000, step=10000)
 annual_rate = st.number_input("연 이자율 (%)", min_value=0.0, value=5.0)
 years = st.number_input("대출 기간 (년)", min_value=1, value=30)
 ltv = st.number_input("LTV 비율 (%)", min_value=1.0, max_value=100.0, value=80.0)
+jeonse = st.number_input("보유 중인 전세금 (₩)", min_value=0, value=0, step=1000000)
 
 if st.button("계산하기"):
     loan_amount, house_price = calculate_house_price(monthly_payment, annual_rate, years, ltv)
+    my_cash = house_price - loan_amount
+    my_cash_ratio = my_cash / house_price * 100
+    additional_needed = my_cash - jeonse
+
     st.success(f"📌 대출 가능 금액: {loan_amount:,.0f} 원")
     st.success(f"📌 구매 가능한 아파트 가격: {house_price:,.0f} 원")
+    st.info(f"💰 내가 준비해야 할 현금: {my_cash:,.0f} 원 ({my_cash_ratio:.1f}%)")
 
-st.caption("※ 월 상환 가능액 기준으로 대출 및 구매 가능한 아파트 가격을 계산합니다.")
+    if jeonse > 0:
+        if additional_needed > 0:
+            st.warning(f"📉 전세금을 제외하고도 추가로 더 필요한 금액: {additional_needed:,.0f} 원")
+        else:
+            st.success(f"✅ 전세금으로 충분합니다! 여유 금액: {abs(additional_needed):,.0f} 원")
+
+st.caption("※ 월 상환 가능액 기준으로 대출 및 구매 가능한 아파트 가격, 자기자본과 전세금 반영 현금 필요액을 계산합니다.")
