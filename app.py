@@ -7,7 +7,7 @@ def calculate_house_price(monthly_payment, annual_rate, years, ltv):
     house_price = loan_amount / (ltv / 100)
     return loan_amount, house_price
 
-st.title("🏡 아파트 구매 가능 가격 계산기 by NOWKO")
+st.title("🏡 내가 살 수 있는 집은 얼마마 by NOWKO")
 
 # 월 상환 가능액 입력
 monthly_payment = st.number_input(
