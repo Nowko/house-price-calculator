@@ -1,8 +1,5 @@
 import streamlit as st
 
-import locale
-locale.setlocale(locale.LC_ALL, '')
-
 def calculate_house_price(monthly_payment, annual_rate, years, ltv):
     monthly_rate = annual_rate / 12 / 100
     total_months = years * 12
@@ -12,11 +9,14 @@ def calculate_house_price(monthly_payment, annual_rate, years, ltv):
 
 st.title("🏡 아파트 구매 가능 가격 계산기 by NOWKO")
 
-formatted_default = locale.format_string("%d", 1800000, grouping=True)
-monthly_payment_input = st.text_input("월 상환 가능액 (₩)", value=formatted_default)
-
-# 숫자 추출
-monthly_payment = int(monthly_payment_input.replace(',', '').replace(' ', '')) if monthly_payment_input else 0
+# 월 상환 가능액을 number_input으로 설정 (조정 단위: 10,000원)
+monthly_payment = st.number_input(
+    "월 상환 가능액 (₩)", 
+    min_value=0, 
+    value=1800000, 
+    step=10000, 
+    format="%d"
+)
 
 annual_rate = st.number_input("연 이자율 (%)", min_value=0.0, value=5.0)
 years = st.number_input("대출 기간 (년)", min_value=1, value=30)
