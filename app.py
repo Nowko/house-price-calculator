@@ -16,17 +16,26 @@ monthly_payment = st.number_input(
     value=1800000,
     step=10000
 )
-
-# 입력된 월 상환 금액을 '만원' 단위로 표시
+# 입력 금액을 '만 원' 단위로 보조 표시
 monthly_payment_million = monthly_payment / 10000
 st.caption(f"현재 입력된 월 상환 가능액: {monthly_payment_million:,.0f}만 원")
 
-# 기타 입력 항목
+# 이자율, 기간, LTV
 annual_rate = st.number_input("연 이자율 (%)", min_value=0.0, value=5.0)
 years = st.number_input("대출 기간 (년)", min_value=1, value=30)
 ltv = st.number_input("LTV 비율 (%)", min_value=1.0, max_value=100.0, value=80.0)
-jeonse = st.number_input("보유 중인 전세금 (₩)", min_value=0, value=0, step=1000000)
 
+# 전세금 입력: 1000만 원 단위 조정
+jeonse = st.number_input(
+    "보유 중인 전세금 (₩)",
+    min_value=0,
+    value=30000000,
+    step=10000000
+)
+jeonse_million = jeonse / 10000
+st.caption(f"현재 입력된 전세금: {jeonse_million:,.0f}만 원")
+
+# 계산
 if st.button("계산하기"):
     loan_amount, house_price = calculate_house_price(monthly_payment, annual_rate, years, ltv)
     my_cash = house_price - loan_amount
