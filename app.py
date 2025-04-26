@@ -37,7 +37,7 @@ jeonse_million = jeonse / 10000
 st.caption(f"현재 입력된 전세금: {jeonse_million:,.0f}만 원")
 
 # 계산
-if st.button("계산하기"):
+if st.button("🧮 계산하기"):
     loan_amount, house_price = calculate_house_price(monthly_payment, annual_rate, years, ltv)
     my_cash = house_price - loan_amount
     my_cash_ratio = my_cash / house_price * 100
