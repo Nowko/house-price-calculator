@@ -24,7 +24,12 @@ st.caption(f"현재 입력된 월 상환 가능액: {monthly_payment_million:,.0
 # 이자율, 기간, LTV
 annual_rate = st.number_input("연 이자율 (%)", min_value=0.0, value=5.0)
 years = st.number_input("대출 기간 (년)", min_value=1, value=30)
-ltv = st.number_input("LTV 비율 (%)", min_value=1.0, max_value=100.0, value=80.0)
+ltv = st.number_input( "LTV 비율 (%)",
+    min_value=1,
+    max_value=100,
+    value=80,
+    step=1,
+    format="%d" )
 
 # 전세금 입력: 100만 원 단위 조정
 jeonse = st.number_input(
