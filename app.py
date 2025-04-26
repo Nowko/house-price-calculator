@@ -15,7 +15,7 @@ monthly_payment = st.number_input(
     min_value=0, 
     value=1800000, 
     step=10000, 
-    format="%d"
+    format="%,d"  # ✅ 여기서 천단위 포맷 명시
 )
 
 annual_rate = st.number_input("연 이자율 (%)", min_value=0.0, value=5.0)
