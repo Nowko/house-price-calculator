@@ -9,13 +9,12 @@ def calculate_house_price(monthly_payment, annual_rate, years, ltv):
 
 st.title("🏡 아파트 구매 가능 가격 계산기 by NOWKO")
 
-# 월 상환 가능액을 number_input으로 설정 (조정 단위: 10,000원)
+# 월 상환 가능액 (format 제거, 숫자만 받고 표시할 때 쉼표 추가)
 monthly_payment = st.number_input(
-    "월 상환 가능액 (₩)", 
-    min_value=0, 
-    value=1800000, 
-    step=10000, 
-    format="%,d"  # ✅ 여기서 천단위 포맷 명시
+    "월 상환 가능액 (₩)",
+    min_value=0,
+    value=1800000,
+    step=10000
 )
 
 annual_rate = st.number_input("연 이자율 (%)", min_value=0.0, value=5.0)
