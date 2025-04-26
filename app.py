@@ -12,7 +12,7 @@ st.caption("made by NOWKO on Brunch")
 
 # 월 상환 가능액 입력
 monthly_payment = st.number_input(
-    "월 상환 가능액 (₩)",
+    "월 원리금이자 가능액 (₩)",
     min_value=0,
     value=1800000,
     step=10000
