@@ -59,4 +59,4 @@ if st.button("🧮 계산하기"):
             st.success(f"✅ 전세금으로 충분합니다! 여유 금액: {abs(additional_needed):,.0f} 원")
 
     # 🆕 추가된 문구
-    st.info(f"📢 현재 {monthly_payment_million:,.0f}만 원으로 월세를 살고 있다면,\n구매 가능한 아파트 가격 {house_price:,.0f} 원 수준의 집을 고려해 볼 수 있습니다.")
+    st.info(f"📢 현재 {monthly_payment_million:,.0f}만 원으로 월세를 살고 있다면,\n {house_price:,.0f} 원 수준의 아파트 구매를 고려해 볼 수 있습니다.")
