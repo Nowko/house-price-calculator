@@ -39,7 +39,7 @@ if "max_payment_won" in st.session_state:
     years = st.number_input("대출 기간 (년)", min_value=1, value=30)
     ltv = st.number_input("LTV (%)", min_value=1, max_value=100, value=80, step=1)
 
-    jeonse_m = st.number_input("보유 중인 전세금 (만 원)", min_value=0, value=3000, step=100)
+    jeonse_m = st.number_input("보유 중인 전세금(혹은 보증금) (만 원)", min_value=0, value=3000, step=100)
     jeonse = jeonse_m * 10000
 
     # 2단계 계산 버튼
@@ -48,7 +48,7 @@ if "max_payment_won" in st.session_state:
         loan_amount_won, house_price_won = calculate_house_price(
             monthly_payment, annual_rate, years, ltv
         )
-        # 추가로 필요한 현금 (전세금 제외)
+        # 추가로 필요한 현금 (전세금(혹은 보증금) 제외)
         need_won = (house_price_won - loan_amount_won) - jeonse
 
         # 단위 변환
@@ -60,13 +60,13 @@ if "max_payment_won" in st.session_state:
         # 결과 출력
         st.subheader(f"🏠 구매 가능한 아파트 가격: {house_eok:.2f}억 원")
         st.write(f"- 💰 대출: {loan_m:,.0f}만 원")
-        st.write(f"- 🏦 전세금: {jeonse_m:,.0f}만 원")
+        st.write(f"- 🏦 전세금(혹은 보증금): {jeonse_m:,.0f}만 원")
         st.write(f"- ➕ 추가로 필요한 금액: {need_m:,.0f}만 원")
 
         # 참고 문구
         if jeonse_m > 0:
             st.caption(
-                f"📌 현제 전세금 외에 {need_m:,.0f}만 원이 있고, 월 {monthly_payment_m:,.0f}만 원의 월세가 나간다면, {house_eok:.2f}억 원의 집 구매를 고려해볼 만합니다."
+                f"📌 현제 전세금(혹은 보증금) 외에 {need_m:,.0f}만 원이 있고, 월 {monthly_payment_m:,.0f}만 원의 월세가 나간다면, {house_eok:.2f}억 원의 집 구매를 고려해볼 만합니다."
             )
         else:
             st.caption(
