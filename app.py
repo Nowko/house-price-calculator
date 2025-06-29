@@ -10,7 +10,7 @@ def calculate_house_price(monthly_payment_won, annual_rate, years, ltv):
 
 # 앱 제목 및 설명
 st.title("🏡 내가 살 수 있는 집은 얼마?")
-st.caption("made by NOWKO on Brunch")
+st.caption("made by [NOWKO on Brunch](https://brunch.co.kr/@nftmby)")
 
 # 1단계: 급여(만 원) 및 DSR 입력
 salary_m = st.number_input("월 급여 (만 원)", min_value=0, value=350, step=10)
