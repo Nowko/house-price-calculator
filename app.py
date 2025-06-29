@@ -37,17 +37,27 @@ if "max_payment" in st.session_state:
 
     # 2단계 계산 버튼
     if st.button("🧮 ② 구매 가능 금액 계산하기"):
+        # 대출 및 집값 계산
         loan_amount, house_price = calculate_house_price(
             monthly_payment, annual_rate, years, ltv
         )
+        # 추가로 필요한 현금 (전세금 제외)
         need = (house_price - loan_amount) - jeonse
+        # 억 단위 변환
+        house_eok = house_price / 100000000
+        # 만원 단위 계산
+        loan_million = loan_amount / 10000
+        jeonse_million = jeonse / 10000
+        need_million = max(0, need) / 10000
+        monthly_rent_million = monthly_payment / 10000
 
         # 결과 출력
-        house_eok = house_price / 100000000
         st.subheader(f"🏠 구매 가능한 아파트 가격: {house_eok:.2f}억 원")
-        st.write(f"- 💰 대출: {loan_amount/10000:,.0f}만 원")
-        st.write(f"- 🏦 전세금: {jeonse/10000:,.0f}만 원")
-        st.write(f"- ➕ 추가로 필요한 금액: {max(0, need)/10000:,.0f}만 원")
+        st.write(f"- 💰 대출: {loan_million:,.0f}만 원")
+        st.write(f"- 🏦 전세금: {jeonse_million:,.0f}만 원")
+        st.write(f"- ➕ 추가로 필요한 금액: {need_million:,.0f}만 원")
+
+        # 수정된 참고 문구
         st.caption(
-            f"📌 현재 월 {monthly_payment/10000:,.0f}만 원의 월세가 나간다면, {house_eok:.2f}억 원의 집 구매를 고려해볼 만합니다."
+            f"📌 현재 {need_million:,.0f}만 원이 있고, 월 {monthly_rent_million:,.0f}만 원의 월세가 나간다면, {house_eok:.2f}억 원의 집 구매를 고려해볼 만합니다."
         )
