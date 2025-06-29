@@ -29,7 +29,7 @@ dsr = st.number_input(
 # 최대 월 납입 가능액 예시 계산
 max_monthly_payment = salary * (dsr / 100)
 max_monthly_million = max_monthly_payment / 10000
-st.info(f"💡 계산된 최대 월 납입 가능액: {max_monthly_payment:,.0f}원 ({max_monthly_million:,.0f}만 원)")
+st.info(f"💡 최대 가능 대출 이자 월 납입액: {max_monthly_payment:,.0f}원 ({max_monthly_million:,.0f}만 원)")
 
 # 2) 실제 월 상환액 입력 (기본값: 계산된 최대 납입액)
 monthly_payment = st.number_input(
