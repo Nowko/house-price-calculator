@@ -63,7 +63,12 @@ if "max_payment_won" in st.session_state:
         st.write(f"- 🏦 전세금: {jeonse_m:,.0f}만 원")
         st.write(f"- ➕ 추가로 필요한 금액: {need_m:,.0f}만 원")
 
-        # 참고 문구
-        st.caption(
-            f"📌 현재 {need_m:,.0f}만 원이 있고, 월 {monthly_payment_m:,.0f}만 원의 월세가 나간다면, {house_eok:.2f}억 원의 집 구매를 고려해볼 만합니다."
-        )
+        # 참고 문구 (전세금이 0인 경우 '전세금 외에' 문구 생략)
+        if jeonse_m > 0:
+            st.caption(
+                f"📌 현제 전세금 외에 {need_m:,.0f}만 원이 있고, 월 {monthly_payment_m:,.0f}만 원의 월세가 나간다면, {house_eok:.2f}억 원의 집 구매를 고려해볼 만합니다."
+            )
+        else:
+            st.caption(
+                f"📌 월 {monthly_payment_m:,.0f}만 원의 월세가 나간다면, {house_eok:.2f}억 원의 집 구매를 고려해볼 만합니다."
+            )
